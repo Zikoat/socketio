@@ -106,7 +106,6 @@ function update() {
 	} else if(enemy.body.touching.left){
 		enemy.body.velocity.x = -150;
 		enemy.animations.play("right");
-		
 	}
 
 }
