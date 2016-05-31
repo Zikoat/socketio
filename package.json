@@ -4,7 +4,14 @@
   "description": "my first socket.io app",
   "dependencies": {
     "express": "^4.13.4",
+    "gulp-exec": "^2.1.2",
+    "opn": "^4.0.2",
     "phaser": "^2.4.8",
     "socket.io": "^1.4.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.1",
+    "jshint": "^2.9.2"
   }
 }
