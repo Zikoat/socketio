@@ -3,15 +3,16 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var syncedVar = 0;
+var syncedVar = 20;
 
 app.use(express.static("public"));
 
 io.on('connection', function(socket) {
-	process.stdout.write('a user connected\n')
+	"use strict";
+	process.stdout.write('a user connected\n');
 
 	socket.on('disconnect', function() {
-		process.stdout.write('a user disconnected\n')
+		process.stdout.write('a user disconnected\n');
 	});
 
 	socket.on("increase", function() {
@@ -25,7 +26,7 @@ io.on('connection', function(socket) {
 
 	socket.on("reset", function() {
 		syncedVar = 0;
-		io.emit("reset")
+		io.emit("reset");
 		console.log("RESET");
 	});
 

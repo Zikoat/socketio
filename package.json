@@ -13,10 +13,12 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.1",
-    "jshint": "^2.9.2"
+    "gulp-nodemon": "^2.0.7",
+    "jshint": "^2.9.2",
+    "nodemon": "^1.9.2"
   },
   "scripts": {
     "start": "node index.js",
     "opn": "opn http://localhost:3000"
-  } 
+  }
 }
