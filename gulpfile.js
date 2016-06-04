@@ -2,7 +2,7 @@ var gulp = require("gulp");
 
 var jshint = require('gulp-jshint');
 var opn = require("opn");
-var gls = require('gulp-live-server');
+
 var exec = require('gulp-exec');
 var nodemon = require("nodemon");
 
