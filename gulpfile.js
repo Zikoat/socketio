@@ -1,3 +1,5 @@
+/*jslint node: true, esversion: 6*/
+"use strict";
 var gulp = require("gulp");
 
 var jshint = require('gulp-jshint');
@@ -9,7 +11,6 @@ var nodemon = require("nodemon");
 gulp.task("default", ["startServer", "opnPage", "jshint", "watch"]);
 
 gulp.task("jshint", function() {
-	console.log("linting...");
 	return gulp.src([
 			"./**/*.js", 
 			"!./node_modules/**/*", 

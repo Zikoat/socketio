@@ -9,7 +9,7 @@ function preload() {
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-    game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32)
+    game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
 }
 
 function create() {
@@ -49,8 +49,8 @@ function create() {
 		star.body.bounce.y =0.7 + Math.random() * 0.2;
 	}
 
-	scoreText = game.add.text(16, 16, "Score: 0", {fontSize: "32px", fill:"#000"})
-	globalScoreText = game.add.text(16, 64, "Global Score: ", {fontSize: "32px", fill:"#000"})
+	scoreText = game.add.text(16, 16, "Score: 0", {fontSize: "32px", fill:"#000"});
+	globalScoreText = game.add.text(16, 64, "Global Score: ", {fontSize: "32px", fill:"#000"});
 
 	enemy = game.add.sprite(0, 0, "baddie");
 	game.physics.arcade.enable(enemy);
