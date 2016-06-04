@@ -1,3 +1,5 @@
+/*jslint node: true */
+"use strict";
 var express = require("express");
 var app = require('express')();
 var http = require('http').Server(app);
@@ -8,7 +10,6 @@ var syncedVar = 20;
 app.use(express.static("public"));
 
 io.on('connection', function(socket) {
-	"use strict";
 	process.stdout.write('a user connected\n');
 
 	socket.on('disconnect', function() {
@@ -35,6 +36,6 @@ io.on('connection', function(socket) {
 });
 
 http.listen(3000, function() {
-	console.log("listening on *:3000");
+	console.log("listening on localhost:3000\n");
 	//http.close();
 });

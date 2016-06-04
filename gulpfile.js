@@ -8,9 +8,10 @@ var opn = require("opn");
 var exec = require('gulp-exec');
 var nodemon = require("nodemon");
 
-gulp.task("default", ["startServer", "opnPage", "jshint", "watch"]);
+gulp.task("default", ["startServer", "jshint", "watch"]);
 
 gulp.task("jshint", function() {
+	console.log("public files changed, sending reload request");
 	return gulp.src([
 			"./**/*.js", 
 			"!./node_modules/**/*", 
@@ -26,26 +27,13 @@ gulp.task("opnPage", function() {
 });
 
 gulp.task("watch", function() {
+	console.log("watching files...");
 	gulp.watch("./*.js", ["jshint"]);
-	gulp.watch("./public/*", ["opnPage"]);
+	gulp.watch("./public/*", () => {
+	});
 });
 
 gulp.task('startServer', function() {
-	nodemon({script: "index.js"})
-		.on("start", () => {});
+	nodemon({script: "index.js", "ignore": ["./public"]})
+		.on("start", () => {console.log("server started");});
 });
-
-//gulp.watch('./**/*.js', function(event) {
-  //console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  //jshint(event.path);
-//});
-
-/* gulp todo
-watch public js files. jshint and open chrome
-watch server side files. jshint and restart server
-task: 
-nodemon(index.js)
-
-/*gulp.watch("refresh", function() {
-
-});*/
