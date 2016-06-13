@@ -29,8 +29,7 @@ gulp.task("opnPage", function() {
 gulp.task("watch", function() {
 	console.log("watching files...");
 	gulp.watch("./*.js", ["jshint"]);
-	gulp.watch("./public/*", () => {
-	});
+	gulp.watch("./public/*", ["jshint"]);
 });
 
 gulp.task('startServer', function() {
