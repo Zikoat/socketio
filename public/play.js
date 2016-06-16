@@ -89,7 +89,7 @@ function update() {
 function render() {
 	//game.debug.pointer(game.input.pointer1);
 	//game.debug.inputInfo(20,20);
-	game.debug.text(player.body.acceleration, 20, 20);
+	// game.debug.text(player.body.acceleration, 20, 20);
 
 }
 window.addEventListener('load', function() {
