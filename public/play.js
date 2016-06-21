@@ -93,35 +93,32 @@ function playerMovement(controlState) {
 	}
 }
 
-playerMovement.rotate = function () {
+playerMovement.rotate = function (speed, rotationSpeed=6.5) {
 	let left = cursors.left.isDown;
 	let right = cursors.right.isDown;
 	let up = cursors.up.isDown;
 	let down = cursors.down.isDown;
 
-	// player.rotation = horizontalAxis(left, right);
-	if(left){player.rotation -= 0.05;}
-	if(right){player.rotation += 0.05;}
-	if(up){
-		player.body.acceleration = game.physics.arcade.accelerationFromRotation(player.rotation, 200);
+	player.rotation += (getAxis(right, left) / 100) * rotationSpeed;
+
+	let torque = getAxis(down, up);
+	let direction = game.physics.arcade.accelerationFromRotation(player.rotation, speed * 200 )
+
+	player.body.velocity = direction;
+	/*if(up){
+		player.body.acceleration = ;
 	} else {player.body.acceleration = 0;}
-	player.body.velocity.clamp(-200,200);
+	player.body.velocity.clamp(-200,200);*/
 };
 
-function horizontalAxis(left, right) {
-	let axis = right ? 1 : 0;
-	axis -= left ? 1 : 0;
-	return axis;
-}
-
-function verticalAxis(up, down) {
-
+function getAxis(positive, negative) {
+	return (positive ? 1 : 0) - (negative ? 1 : 0);
 }
 
 function render() {
 	//game.debug.pointer(game.input.pointer1);
 	//game.debug.inputInfo(20,20);
-	// game.debug.text(player.body.acceleration, 20, 20);
+	game.debug.text("velocity = " + player.body.velocity, 20, 20);
 
 }
 
