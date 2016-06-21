@@ -35,8 +35,8 @@ function create() {
 	player.scale.setTo(0.5, 0.5);
 	player.anchor.setTo(0.5, 0.5);
 	player.body.collideWorldBounds = true;
-	player.rotation = -Math.PI /2;
-	player.body.drag = new Phaser.Point(100,100);
+	player.rotation = - Math.PI/2;
+	// player.body.drag = new Phaser.Point(100,100);
 
 
 	//controlState = "4-way"
@@ -94,19 +94,27 @@ function playerMovement(controlState) {
 }
 
 playerMovement.rotate = function () {
-	if(cursors.left.isDown){player.rotation -= 0.05;}
-	if(cursors.right.isDown){player.rotation += 0.05;}
-	if(cursors.up.isDown){
+	let left = cursors.left.isDown;
+	let right = cursors.right.isDown;
+	let up = cursors.up.isDown;
+	let down = cursors.down.isDown;
+
+	// player.rotation = horizontalAxis(left, right);
+	if(left){player.rotation -= 0.05;}
+	if(right){player.rotation += 0.05;}
+	if(up){
 		player.body.acceleration = game.physics.arcade.accelerationFromRotation(player.rotation, 200);
 	} else {player.body.acceleration = 0;}
 	player.body.velocity.clamp(-200,200);
 };
 
 function horizontalAxis(left, right) {
-	
+	let axis = right ? 1 : 0;
+	axis -= left ? 1 : 0;
+	return axis;
 }
 
-function verticalAxis() {
+function verticalAxis(up, down) {
 
 }
 
