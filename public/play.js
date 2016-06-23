@@ -26,8 +26,6 @@ function create() {
 	player.body.collideWorldBounds = true;
 	player.rotation = - Math.PI/2;
 	// player.body.drag = new Phaser.Point(100,100);
-	console.log(player);
-
 
 	//controlState = "4-way"
 	controlState = "rotate";
