@@ -12,6 +12,8 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
     game.load.image('ship', 'assets/ship.png');
+    game.load.audio("space groove", 'assets/8 Bit Space Groove! by HeatleyBros.wav'); 
+
 }
 
 function create() {
@@ -40,6 +42,10 @@ function create() {
 
 	scoreText = game.add.text(16, 16, "Score: 0", {fontSize: "32px", fill:"#000"});
 	// globalScoreText = game.add.text(16, 64, "Global Score: ", {fontSize: "32px", fill:"#000"});
+
+	music = game.add.audio("space groove");
+	music.play();
+	music.loop = true;
 }
 
 function update() {
