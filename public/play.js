@@ -1,6 +1,5 @@
 //strict should not be used
 /*jshint esversion: 6 */ 
-var socket = io();
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update, render:render });
 
@@ -15,16 +14,6 @@ function preload() {
     game.load.image('ship', 'assets/ship.png');
 }
 
-class Player extends Phaser.Sprite {
-	constructor(x=50, y=50){
-		super(game, x, y, "ship");
-	}
-
-	movement () {
-
-	}
-}
-
 function create() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 	game.add.sprite(0,0,"sky");
@@ -37,6 +26,7 @@ function create() {
 	player.body.collideWorldBounds = true;
 	player.rotation = - Math.PI/2;
 	// player.body.drag = new Phaser.Point(100,100);
+	console.log(player);
 
 
 	//controlState = "4-way"
@@ -51,21 +41,16 @@ function create() {
 	}
 
 	scoreText = game.add.text(16, 16, "Score: 0", {fontSize: "32px", fill:"#000"});
-	globalScoreText = game.add.text(16, 64, "Global Score: ", {fontSize: "32px", fill:"#000"});
+	// globalScoreText = game.add.text(16, 64, "Global Score: ", {fontSize: "32px", fill:"#000"});
 }
 
 function update() {
 
 	game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
-	function collectStar(player, star) {
-		star.reset(Math.random()*(game.world.width - 24), Math.random()*(game.world.height - 22));
-		socket.emit('increase', globalScore);
-		score++;
-		scoreText.text = "Score: " + score;
-		star.body.bounce.y =0.7 + Math.random() * 0.2;
-	}
-	playerMovement.rotate();
+	
+
+	playerMovement.rotate(4.5, 5);
 }
 
 
@@ -93,7 +78,7 @@ function playerMovement(controlState) {
 	}
 }
 
-playerMovement.rotate = function (speed, rotationSpeed=6.5) {
+playerMovement.rotate = function (speed=1, rotationSpeed=6.5) {
 	let left = cursors.left.isDown;
 	let right = cursors.right.isDown;
 	let up = cursors.up.isDown;
@@ -101,8 +86,10 @@ playerMovement.rotate = function (speed, rotationSpeed=6.5) {
 
 	player.rotation += (getAxis(right, left) / 100) * rotationSpeed;
 
-	let torque = getAxis(down, up);
-	let direction = game.physics.arcade.accelerationFromRotation(player.rotation, speed * 200 )
+	let torque = getAxis(up, down);
+	let direction = game.physics.arcade.velocityFromRotation(player.rotation, speed * 60 * torque);
+
+
 
 	player.body.velocity = direction;
 	/*if(up){
@@ -111,6 +98,14 @@ playerMovement.rotate = function (speed, rotationSpeed=6.5) {
 	player.body.velocity.clamp(-200,200);*/
 };
 
+function collectStar(player, star) {
+	star.reset(Math.random()*(game.world.width - 24), Math.random()*(game.world.height - 22));
+	// socket.emit('increase', globalScore);
+	score++;
+	scoreText.text = "Score: " + score;
+	star.body.bounce.y =0.7 + Math.random() * 0.2;
+}
+
 function getAxis(positive, negative) {
 	return (positive ? 1 : 0) - (negative ? 1 : 0);
 }
@@ -118,7 +113,8 @@ function getAxis(positive, negative) {
 function render() {
 	//game.debug.pointer(game.input.pointer1);
 	//game.debug.inputInfo(20,20);
-	game.debug.text("velocity = " + player.body.velocity, 20, 20);
+	// game.debug.text("velocity = " + player.body.velocity, 20, 20);
+	// game.debug.spriteInfo(player, 20, 40);
 
 }
 
@@ -127,7 +123,7 @@ window.addEventListener('load', function() {
 }, false);
 
 
-
+/*
 socket.on("increase", function(count){
 	globalScore = count;
 	// $('.counter').html(globalScore);
@@ -136,4 +132,4 @@ socket.on("increase", function(count){
 
 socket.on("reset", function() {
 	$('.counter').html(0);
-});
+});*/

@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "globals": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
