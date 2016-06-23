@@ -13,6 +13,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
     game.load.image('ship', 'assets/ship.png');
+    game.load.audio("space groove", 'assets/8 Bit Space Groove! by HeatleyBros.wav');
 }
 
 class Player extends Phaser.Sprite {
@@ -102,7 +103,7 @@ playerMovement.rotate = function (speed, rotationSpeed=6.5) {
 	player.rotation += (getAxis(right, left) / 100) * rotationSpeed;
 
 	let torque = getAxis(down, up);
-	let direction = game.physics.arcade.accelerationFromRotation(player.rotation, speed * 200 )
+	let direction = game.physics.arcade.accelerationFromRotation(player.rotation, speed * 200 );
 
 	player.body.velocity = direction;
 	/*if(up){
