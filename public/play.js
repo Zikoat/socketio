@@ -37,7 +37,7 @@ function create() {
 
 	stars = game.add.group();
 	stars.enableBody = true;
-	for (var i = 0; i < 12; i++) {
+	for (var i = 0; i < 100; i++) {
 		var star = stars.create(Math.random()*(game.world.width - 24), Math.random()*(game.world.height - 22), "star");
 	}
 
