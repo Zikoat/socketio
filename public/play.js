@@ -13,7 +13,7 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
     game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32);
     game.load.image('ship', 'assets/ship.png');
-    game.load.audio("space groove", 'assets/8 Bit Space Groove! by HeatleyBros.mp3'); 
+    game.load.audio("space groove", 'assets/8 Bit Space Groove! by HeatleyBros.wav'); 
 
 }
 
@@ -46,7 +46,7 @@ function create() {
 
 	music = game.add.audio("space groove");
 	music.play();
-	music.loopFull(0.5);
+	music.loop = true;
 }
 
 function update() {
